@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.card.ms.model.EntityCreditCard;
 import com.card.ms.service.CreditCardServiceImp;
+import com.card.ms.service.ICreditCardService;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -20,16 +21,16 @@ import reactor.core.publisher.Mono;
 public class ControllerCreditCard {
 
 	@Autowired
-	CreditCardServiceImp imple;
+	ICreditCardService imple;
 	
 	@GetMapping("/getCreditCard")
 	Flux<EntityCreditCard> getCreditCard(){
 		return imple.allCreditCard();
 	}
 	
-	@GetMapping("/getCreditCardDni/{dni}")
-	Mono<EntityCreditCard> getCreditCardDni(@PathVariable("dni") String dni){
-		return imple.creditCardDni(dni);
+	@GetMapping("/getCreditCarNumAcc/{numCard}")
+	Mono<EntityCreditCard> getCreditCardDni(@PathVariable("numCard") String numCard){
+		return imple.findByNumCard(numCard);
 	}
 	
 	@PostMapping("/postCreditCard")
@@ -42,18 +43,10 @@ public class ControllerCreditCard {
 		return imple.updCreditCard(creditCard);
 	}
 	
-	@PostMapping("/updTransancionesCreditCard/{dni}/{tipo}/{cash}")
-	public Mono<EntityCreditCard> updCurrentCash(@PathVariable("dni") String dni 
+	@PostMapping("/updTransancionesCreditCard/{numCard}/{tipo}/{cash}")
+	public Mono<EntityCreditCard> updCurrentCash(@PathVariable("numCard") String numCard 
 			,@PathVariable("tipo") String tipo ,@PathVariable("cash")  Double cash){
-			return imple.creditCardDni(dni)
-					.flatMap(p ->{
-						if(tipo.equals("r") && p.getCash() >= cash) {
-							p.setCash(p.getCash() - cash);
-						}else if (tipo.equals("d")){
-							p.setCash( p.getCash() + cash);
-						}
-				return imple.updCreditCard(p);
-				});
+			return imple.transactionCreditCard(numCard, tipo, cash);
 
 	}
 	

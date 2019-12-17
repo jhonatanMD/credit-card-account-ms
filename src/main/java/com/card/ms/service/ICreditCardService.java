@@ -11,6 +11,7 @@ public interface ICreditCardService {
 	Mono<EntityCreditCard> saveCreditCard(final EntityCreditCard creditCard);
 	Mono<EntityCreditCard> updCreditCard(final EntityCreditCard creditCard);
 	Mono<Void> dltCreditCard(String id);
-	Mono<EntityCreditCard> creditCardDni(String dni);
+	Mono<EntityCreditCard> findByNumCard(String numCard);
+	Mono<EntityCreditCard> transactionCreditCard(String numCard , String tipo,Double cash);
 	
 }
