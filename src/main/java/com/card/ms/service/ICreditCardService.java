@@ -8,6 +8,7 @@ import reactor.core.publisher.Mono;
 public interface ICreditCardService {
 
 	Flux<EntityCreditCard> allCreditCard();
+	Flux<EntityCreditCard> creditCardByNumDoc(String numDoc);
 	Mono<EntityCreditCard> saveCreditCard(final EntityCreditCard creditCard);
 	Mono<EntityCreditCard> updCreditCard(final EntityCreditCard creditCard);
 	Mono<Void> dltCreditCard(String id);

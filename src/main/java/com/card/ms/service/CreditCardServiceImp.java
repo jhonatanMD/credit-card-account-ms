@@ -91,4 +91,10 @@ public class CreditCardServiceImp implements ICreditCardService{
 		
 	}
 
+	@Override
+	public Flux<EntityCreditCard> creditCardByNumDoc(String numDoc) {
+		// TODO Auto-generated method stub
+		return repository.findByNumDoc(numDoc);
+	}
+
 }

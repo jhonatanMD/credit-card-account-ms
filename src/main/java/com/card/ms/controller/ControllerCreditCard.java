@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.card.ms.model.EntityCreditCard;
-import com.card.ms.service.CreditCardServiceImp;
 import com.card.ms.service.ICreditCardService;
 
 import reactor.core.publisher.Flux;
@@ -27,6 +26,13 @@ public class ControllerCreditCard {
 	Flux<EntityCreditCard> getCreditCard(){
 		return imple.allCreditCard();
 	}
+	
+	
+	@GetMapping("/getCreditCardNumDoc/{numDoc}")
+	Flux<EntityCreditCard> getCreditCardNumDoc(@PathVariable("numDoc") String numDoc){
+		return imple.creditCardByNumDoc(numDoc);
+	}
+	
 	
 	@GetMapping("/getCreditCarNumAcc/{numCard}")
 	Mono<EntityCreditCard> getCreditCardDni(@PathVariable("numCard") String numCard){
