@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.card.ms.model.EntityCreditCard;
+import com.card.ms.model.EntityTransaction;
 import com.card.ms.service.ICreditCardService;
 
 import reactor.core.publisher.Flux;
@@ -50,7 +51,7 @@ public class ControllerCreditCard {
 	}
 	
 	@PostMapping("/updTransancionesCreditCard/{numCard}/{tipo}/{cash}")
-	public Mono<EntityCreditCard> updCurrentCash(@PathVariable("numCard") String numCard 
+	public Mono<EntityTransaction> updCurrentCash(@PathVariable("numCard") String numCard 
 			,@PathVariable("tipo") String tipo ,@PathVariable("cash")  Double cash){
 			return imple.transactionCreditCard(numCard, tipo, cash);
 

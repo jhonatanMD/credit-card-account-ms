@@ -1,7 +1,5 @@
 package com.card.ms.model;
 
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,7 +18,6 @@ public class EntityCreditCard {
 	private Double cashLimit;
 	
 	private HeadLineEntity  customer;
-	private List<EntityTransaction> transactions;
 	
 
 
@@ -64,17 +61,6 @@ public class EntityCreditCard {
 		this.customer = customer;
 	}
 
-	public List<EntityTransaction> getTransactions() {
-		return transactions;
-	}
-
-	public void setTransactions(List<EntityTransaction> transactions) {
-		this.transactions = transactions;
-	}
-
-	
-	
-	
 
 
 }

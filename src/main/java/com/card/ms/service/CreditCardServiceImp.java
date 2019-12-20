@@ -56,7 +56,7 @@ public class CreditCardServiceImp implements ICreditCardService{
 	}
 
 	@Override
-	public Mono<EntityCreditCard> transactionCreditCard(String numCard, String tipo, Double cash) {
+	public Mono<EntityTransaction> transactionCreditCard(String numCard, String tipo, Double cash) {
 		// TODO Auto-generated method stub
 		return repository.findByNumCard(numCard)
 				.flatMap(p ->{
@@ -72,15 +72,10 @@ public class CreditCardServiceImp implements ICreditCardService{
 					 transaction.setCashT(p.getCash());
 					 transaction.setDateTra(dt);
 					listTransaction = new ArrayList<>();
-					if(p.getTransactions()!=null)
-					{
-						p.getTransactions().forEach(transac-> {
-							listTransaction.add(transac);
-						});
-					}
-					listTransaction.add(transaction);
-					p.setTransactions(listTransaction);
-			return repository.save(p);
+				
+			 repository.save(p).subscribe();
+			
+			return  Mono.just(transaction);
 			});
 		
 		

@@ -1,6 +1,7 @@
 package com.card.ms.service;
 
 import com.card.ms.model.EntityCreditCard;
+import com.card.ms.model.EntityTransaction;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -13,6 +14,6 @@ public interface ICreditCardService {
 	Mono<EntityCreditCard> updCreditCard(final EntityCreditCard creditCard);
 	Mono<Void> dltCreditCard(String id);
 	Mono<EntityCreditCard> findByNumCard(String numCard);
-	Mono<EntityCreditCard> transactionCreditCard(String numCard , String tipo,Double cash);
+	Mono<EntityTransaction> transactionCreditCard(String numCard , String tipo,Double cash);
 	
 }
