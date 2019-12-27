@@ -1,5 +1,7 @@
 package com.card.ms.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
@@ -18,6 +20,11 @@ public interface ICreditCardRepository  extends ReactiveMongoRepository<EntityCr
 	
 	@Query("{'customer.dniH':?0}")
 	Flux<EntityCreditCard> findByNumDoc(String numDoc);
+	
+	
+	
+	@Query("{'customer.dniH': {$in:[ ?0 ]} , 'status':?1}")
+	Flux<EntityCreditCard> findByNumDocList(List<String> numDoc , String status);
 	
 	
 }

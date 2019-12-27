@@ -1,5 +1,7 @@
 package com.card.ms.service;
 
+import java.util.List;
+
 import com.card.ms.model.EntityCreditCard;
 import com.card.ms.model.EntityTransaction;
 
@@ -14,6 +16,6 @@ public interface ICreditCardService {
 	Mono<EntityCreditCard> updCreditCard(final EntityCreditCard creditCard);
 	Mono<Void> dltCreditCard(String id);
 	Mono<EntityCreditCard> findByNumCard(String numCard);
-	Mono<EntityTransaction> transactionCreditCard(String numCard , String tipo,Double cash);
-	
+	Mono<EntityTransaction> transactionCreditCard(String numCard , String tipo,Double cash,int cuotas);
+	Flux<EntityCreditCard> creditCardByNumDocList(List<String> numDoc , String status);
 }

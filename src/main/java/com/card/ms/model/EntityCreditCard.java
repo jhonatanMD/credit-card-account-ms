@@ -1,9 +1,9 @@
 package com.card.ms.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-
 
 @Document(collection = "CreditCard")
 public class EntityCreditCard {
@@ -17,10 +17,16 @@ public class EntityCreditCard {
 	
 	private Double cashLimit;
 	
+	private Double cashPay;
+	
+	private int cuotas;
+	
+	private List<String> datesPay;
+	
 	private HeadLineEntity  customer;
 	
-
-
+	private String status;
+	
 	public String getCodCur() {
 		return codCur;
 	}
@@ -52,6 +58,31 @@ public class EntityCreditCard {
 	public void setCashLimit(Double cashLimit) {
 		this.cashLimit = cashLimit;
 	}
+	
+	
+	public Double getCashPay() {
+		return cashPay;
+	}
+
+	public void setCashPay(Double cashPay) {
+		this.cashPay = cashPay;
+	}
+
+	public int getCuotas() {
+		return cuotas;
+	}
+
+	public void setCuotas(int cuotas) {
+		this.cuotas = cuotas;
+	}
+
+	public List<String> getDatesPay() {
+		return datesPay;
+	}
+
+	public void setDatesPay(List<String> datesPay) {
+		this.datesPay = datesPay;
+	}
 
 	public HeadLineEntity getCustomer() {
 		return customer;
@@ -61,6 +92,12 @@ public class EntityCreditCard {
 		this.customer = customer;
 	}
 
+	public String getStatus() {
+		return status;
+	}
 
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 }
