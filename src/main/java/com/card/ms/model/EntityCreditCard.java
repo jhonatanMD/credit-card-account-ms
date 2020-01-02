@@ -1,9 +1,15 @@
 package com.card.ms.model;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 @Document(collection = "CreditCard")
 public class EntityCreditCard {
@@ -19,7 +25,12 @@ public class EntityCreditCard {
 	
 	private Double cashPay;
 	
+	private String bank;
 	private int cuotas;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd", shape = Shape.STRING)
+	@NotNull
+	private Date dateOpen;
 	
 	private List<String> datesPay;
 	
@@ -67,6 +78,14 @@ public class EntityCreditCard {
 	public void setCashPay(Double cashPay) {
 		this.cashPay = cashPay;
 	}
+	
+	public String getBank() {
+		return bank;
+	}
+
+	public void setBank(String bank) {
+		this.bank = bank;
+	}
 
 	public int getCuotas() {
 		return cuotas;
@@ -74,6 +93,15 @@ public class EntityCreditCard {
 
 	public void setCuotas(int cuotas) {
 		this.cuotas = cuotas;
+	}
+
+	
+	public Date getDateOpen() {
+		return dateOpen;
+	}
+
+	public void setDateOpen(Date dateOpen) {
+		this.dateOpen = dateOpen;
 	}
 
 	public List<String> getDatesPay() {

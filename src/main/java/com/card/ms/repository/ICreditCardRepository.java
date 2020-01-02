@@ -1,5 +1,6 @@
 package com.card.ms.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.mongodb.repository.Query;
@@ -25,6 +26,6 @@ public interface ICreditCardRepository  extends ReactiveMongoRepository<EntityCr
 	
 	@Query("{'customer.dniH': {$in:[ ?0 ]} , 'status':?1}")
 	Flux<EntityCreditCard> findByNumDocList(List<String> numDoc , String status);
-	
+	Flux<EntityCreditCard> findByBankAndDateOpenBetween(String bank,Date dt1 ,Date dt2);
 	
 }

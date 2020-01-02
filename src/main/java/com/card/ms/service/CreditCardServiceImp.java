@@ -1,5 +1,6 @@
 package com.card.ms.service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,7 +31,7 @@ public class CreditCardServiceImp implements ICreditCardService{
 	
 	EntityTransaction transaction;
 	List<EntityTransaction> listTransaction;
-	
+	SimpleDateFormat format;
 	@Override
 	public Flux<EntityCreditCard> allCreditCard() {
 		// TODO Auto-generated method stub
@@ -43,12 +44,12 @@ public class CreditCardServiceImp implements ICreditCardService{
 		List<String> docs = new ArrayList<>();
 		docs.add(creditCard.getCustomer().getDniH());
 		creditCard.setCash(creditCard.getCashLimit());
-		
+		creditCard.setDateOpen(new Date());
 		return webClient.responde(docs).flatMap(res -> {
-			if(res.getMsg().equals("")) {
+			if(res.getMsj().equals("")) {
 				return repository.save(creditCard);
 			}else {
-				return null;
+				return Mono.empty();
 			}
 		});
 	}
@@ -107,13 +108,7 @@ public class CreditCardServiceImp implements ICreditCardService{
 			
 			return  Mono.just(transaction);
 			});
-		
-		
-		
-		
 	
-		
-		
 	}
 
 	@Override
@@ -135,6 +130,12 @@ public class CreditCardServiceImp implements ICreditCardService{
 	@Override
 	public Flux<EntityCreditCard> creditCardByNumDocList(List<String> numDoc , String status) {
 		return repository.findByNumDocList(numDoc,status);
+	}
+
+	@Override
+	public Flux<EntityCreditCard> findByBankAndDateOpenBetween(String bank, String dt1, String dt2) throws ParseException {
+		format = new SimpleDateFormat("yyyy-MM-dd");
+		return repository.findByBankAndDateOpenBetween(bank, format.parse(dt1),format.parse(dt2));
 	}
 	
 

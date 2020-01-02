@@ -1,5 +1,6 @@
 package com.card.ms.service;
 
+import java.text.ParseException;
 import java.util.List;
 
 import com.card.ms.model.EntityCreditCard;
@@ -18,4 +19,5 @@ public interface ICreditCardService {
 	Mono<EntityCreditCard> findByNumCard(String numCard);
 	Mono<EntityTransaction> transactionCreditCard(String numCard , String tipo,Double cash,int cuotas);
 	Flux<EntityCreditCard> creditCardByNumDocList(List<String> numDoc , String status);
+	Flux<EntityCreditCard> findByBankAndDateOpenBetween(String bank,String dt1 ,String dt2) throws ParseException;
 }
